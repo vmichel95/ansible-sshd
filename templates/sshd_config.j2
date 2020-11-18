@@ -26,11 +26,11 @@ ListenAddress {{ la }}
 {% endif %}
 
 {% if 'HostKey' in sshd_config %}HostKey {{ sshd_config.HostKey }}{% endif %}
-{% if 'HostKeys' in sshd_config %}
+{% if 'HostKeys' in sshd_config -%}
   {%- for hk in sshd_config.HostKeys %}
 HostKey {{ hk }}
   {%- endfor %}
-{% endif %}
+{%- endif %}
 
 {% if 'RekeyLimit' in sshd_config %}RekeyLimit {{ sshd_config.RekeyLimit }}{% endif %}
 
