@@ -19,11 +19,11 @@ AddressFamily {{ sshd_config.AddressFamily }}
 {% if 'ListenAddress' in sshd_config %}
 ListenAddress {{ sshd_config.ListenAddress }}
 {% endif %}
-{% if 'ListenAddresses' in sshd_config %}
+{% if 'ListenAddresses' in sshd_config -%}
   {% for la in sshd_config.ListenAddresses %}
 ListenAddress {{ la }}
   {% endfor %}
-{% endif %}
+{%- endif %}
 
 {% if 'HostKey' in sshd_config %}HostKey {{ sshd_config.HostKey }}{% endif %}
 {% if 'HostKeys' in sshd_config -%}
