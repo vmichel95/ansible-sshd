@@ -12,18 +12,18 @@
 
 {% if 'Port' in sshd_config %}
 Port {{ sshd_config.Port }}
-{%- endif %}
-{%- if 'AddressFamily' in sshd_config %}
+{% endif %}
+{% if 'AddressFamily' in sshd_config %}
 AddressFamily {{ sshd_config.AddressFamily }}
-{%- endif %}
-{%- if 'ListenAddress' in sshd_config %}
+{% endif %}
+{% if 'ListenAddress' in sshd_config %}
 ListenAddress {{ sshd_config.ListenAddress }}
-{%- endif %}
-{%- if 'ListenAddresses' in sshd_config %}
-  {%- for la in sshd_config.ListenAddresses %}
+{% endif %}
+{% if 'ListenAddresses' in sshd_config %}
+  {% for la in sshd_config.ListenAddresses %}
 ListenAddress {{ la }}
-  {%- endfor %}
-{%- endif %}
+  {% endfor %}
+{% endif %}
 
 {% if 'HostKey' in sshd_config %}HostKey {{ sshd_config.HostKey }}{% endif %}
 {% if 'HostKeys' in sshd_config %}
