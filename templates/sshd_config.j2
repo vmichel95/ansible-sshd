@@ -10,8 +10,12 @@
 # possible, but leave them commented.  Uncommented options override the
 # default value.
 
-{% if 'Port' in sshd_config %}Port {{ sshd_config.Port }}{% endif %}
-{% if 'AddressFamily' in sshd_config %}AddressFamily {{ sshd_config.AddressFamily }}{% endif %}
+{%- if 'Port' in sshd_config %}
+Port {{ sshd_config.Port }}
+{%- endif -%}
+{%- if 'AddressFamily' in sshd_config %}
+AddressFamily {{ sshd_config.AddressFamily }}
+{%- endif -%}
 {% if 'ListenAddress' in sshd_config %}ListenAddress {{ sshd_config.ListenAddress }}{% endif %}
 {% if 'ListenAddresses' in sshd_config %}
   {% for la in sshd_config.ListenAddresses %}
