@@ -144,7 +144,7 @@
 {% if sshd_config['GatewayPorts'] is defined -%}
   GatewayPorts {{ sshd_config.GatewayPorts | ternary('yes', 'no') }}
 {% endif %}
-{% if sshd_config['X11Forwarding'] is /defined -%}
+{% if sshd_config['X11Forwarding'] is defined -%}
   X11Forwarding {{ sshd_config.X11Forwarding | ternary('yes', 'no') }}
 {% endif %}
 {% if sshd_config['X11DisplayOffset'] is defined -%}
