@@ -11,214 +11,214 @@
 # possible, but leave them commented.  Uncommented options override the
 # default value.
 
-{% if 'Port' in sshd_config -%}
+{% if sshd_config['Port'] is defined -%}
   Port {{ sshd_config.Port }}
 {% endif %}
-{% if 'AddressFamily' in sshd_config -%}
+{% if sshd_config['AddressFamily'] is defined -%}
   AddressFamily {{ sshd_config.AddressFamily }}
 {% endif %}
-{% if 'ListenAddress' in sshd_config -%}
+{% if sshd_config['ListenAddress'] is defined -%}
   ListenAddress {{ sshd_config.ListenAddress }}
 {% endif %}
-{% if 'ListenAddresses' in sshd_config -%}
+{% if sshd_config['ListenAddresses'] is defined -%}
   {% for la in sshd_config.ListenAddresses -%}
     ListenAddress {{ la }}
   {% endfor %}
 {% endif %}
 
-{% if 'HostKey' in sshd_config -%}
+{% if sshd_config['HostKey'] is defined -%}
   HostKey {{ sshd_config.HostKey }}
 {% endif %}
-{% if 'HostKeys' in sshd_config -%}
+{% if sshd_config['HostKeys'] is defined -%}
   {% for hk in sshd_config.HostKeys -%}
     HostKey {{ hk }}
   {% endfor %}
 {% endif %}
 
-{% if 'RekeyLimit' in sshd_config -%}
+{% if sshd_config['RekeyLimit'] is defined -%}
   RekeyLimit {{ sshd_config.RekeyLimit }}
 {% endif %}
 
-{% if 'SyslogFacility' in sshd_config -%}
+{% if sshd_config['SyslogFacility'] is defined -%}
   SyslogFacility {{ sshd_config.SyslogFacility }}
 {% endif %}
-{% if 'LogLevel' in sshd_config -%}
+{% if sshd_config['LogLevel'] is defined -%}
   LogLevel {{ sshd_config.LogLevel }}
 {% endif %}
 
 # Authentication:
 
-{% if 'LoginGraceTime' in sshd_config -%}
+{% if sshd_config['LoginGraceTime'] is defined -%}
   LoginGraceTime {{ sshd_config.LoginGraceTime }}
 {% endif %}
-{% if 'PermitRootLogin' in sshd_config -%}
+{% if sshd_config['PermitRootLogin'] is defined -%}
   PermitRootLogin {{ sshd_config.PermitRootLogin }}
 {% endif %}
-{% if 'StrictModes' in sshd_config -%}
+{% if sshd_config['StrictModes'] is defined -%}
   StrictModes {{ 'yes' if sshd_config.StrictModes else 'no' }}
 {% endif %}
-{% if 'MaxAuthTries' in sshd_config -%}
+{% if sshd_config['MaxAuthTries'] is defined -%}
   MaxAuthTries {{ sshd_config.MaxAuthTries }}
 {% endif %}
-{% if 'MaxSessions' in sshd_config -%}
+{% if sshd_config['MaxSessions'] is defined -%}
   MaxSessions {{ sshd_config.MaxSessions }}
 {% endif %}
 
-{% if 'PubkeyAuthentication' in sshd_config -%}
-  PubkeyAuthentication {{ 'yes' if sshd_config.PubkeyAuthentication else 'no' }}
+{% if sshd_config['PubkeyAuthentication'] is defined -%}
+  PubkeyAuthentication {{ sshd_config.PubkeyAuthentication | ternary('yes', 'no') }}
 {% endif %}
 
-{% if 'AuthorizedKeysFile' in sshd_config -%}
+{% if sshd_config['AuthorizedKeysFile'] is defined -%}
   AuthorizedKeysFile {{ sshd_config.AuthorizedKeysFile }}
 {% endif %}
-{% if 'AuthorizedPrincipalsFile' in sshd_config -%}
+{% if sshd_config['AuthorizedPrincipalsFile'] is defined -%}
   AuthorizedPrincipalsFile {{ sshd_config.AuthorizedPrincipalsFile }}
 {% endif %}
 
-{% if 'AuthorizedKeysCommand' in sshd_config -%}
+{% if sshd_config['AuthorizedKeysCommand'] is defined -%}
   AuthorizedKeysCommand {{ sshd_config.AuthorizedKeysCommand }}
 {% endif %}
-{% if 'AuthorizedKeysCommandUser' in sshd_config -%}
+{% if sshd_config['AuthorizedKeysCommandUser'] is defined -%}
   AuthorizedKeysCommandUser {{ sshd_config.AuthorizedKeysCommandUser }}
 {% endif %}
 
 # For this to work you will also need host keys in /etc/ssh/ssh_known_hosts
-{% if 'HostbasedAuthentication' in sshd_config -%}
-  HostbasedAuthentication {{ 'yes' if sshd_config.HostbasedAuthentication else 'no' }}
+{% if sshd_config['HostbasedAuthentication'] is defined -%}
+  HostbasedAuthentication {{ sshd_config.HostbasedAuthentication | ternary('yes', 'no') }}
 {% endif %}
 # Change to yes if you dont trust ~/.ssh/known_hosts for
 # HostbasedAuthentication
-{% if 'IgnoreUserKnownHosts' in sshd_config -%}
-  IgnoreUserKnownHosts {{ 'yes' if sshd_config.IgnoreUserKnownHosts else 'no' }}
+{% if sshd_config['IgnoreUserKnownHosts'] is defined -%}
+  IgnoreUserKnownHosts {{ sshd_config.IgnoreUserKnownHosts | ternary('yes', 'no') }}
 {% endif %}
 
 # Dont read the users ~/.rhosts and ~/.shosts files
-{% if 'IgnoreRhosts' in sshd_config -%}
-  IgnoreRhosts {{ 'yes' if sshd_config.IgnoreRhosts else 'no' }}
+{% if sshd_config['IgnoreRhosts'] is defined -%}
+  IgnoreRhosts {{ sshd_config.IgnoreRhosts | ternary('yes', 'no') }}
 {% endif %}
 
 # To disable tunneled clear text passwords, change to no here!
-{% if 'PasswordAuthentication' in sshd_config -%}
-  PasswordAuthentication {{ 'yes' if sshd_config.PasswordAuthentication else 'no' }}
+{% if sshd_config['PasswordAuthentication'] is defined -%}
+  PasswordAuthentication {{ sshd_config.PasswordAuthentication | ternary('yes', 'no') }}
 {% endif %}
-{% if 'PermitEmptyPasswords' in sshd_config -%}
-  PermitEmptyPasswords {{ 'yes' if sshd_config.PermitEmptyPasswords else 'no' }}
+{% if sshd_config['PermitEmptyPasswords'] is defined -%}
+  PermitEmptyPasswords {{ sshd_config.PermitEmptyPasswords | ternary('yes', 'no') }}
 {% endif %}
 
 # Change to no to disable s/key passwords
-{% if 'ChallengeResponseAuthentication' in sshd_config -%}
-  ChallengeResponseAuthentication {{ 'yes' if sshd_config.ChallengeResponseAuthentication else 'no' }}
+{% if sshd_config['ChallengeResponseAuthentication'] is defined -%}
+  ChallengeResponseAuthentication {{ sshd_config.ChallengeResponseAuthentication | ternary('yes', 'no') }}
 {% endif %}
 
 # Kerberos options
-{% if 'KerberosAuthentication' in sshd_config -%}
-  KerberosAuthentication {{ 'yes' if sshd_config.KerberosAuthentication else 'no' }}
+{% if sshd_config['KerberosAuthentication'] is defined -%}
+  KerberosAuthentication {{ sshd_config.KerberosAuthentication | ternary('yes', 'no') }}
 {% endif %}
-{% if 'KerberosOrLocalPasswd' in sshd_config -%}
-  KerberosOrLocalPasswd {{ 'yes' if sshd_config.KerberosOrLocalPasswd else 'no' }}
+{% if sshd_config['KerberosOrLocalPasswd'] is defined -%}
+  KerberosOrLocalPasswd {{ sshd_config.KerberosOrLocalPasswd | ternary('yes', 'no') }}
 {% endif %}
-{% if 'KerberosTicketCleanup' in sshd_config -%}
-  KerberosTicketCleanup {{ 'yes' if sshd_config.KerberosTicketCleanup else 'no' }}
+{% if sshd_config['KerberosTicketCleanup'] is defined -%}
+  KerberosTicketCleanup {{ sshd_config.KerberosTicketCleanup | ternary('yes', 'no') }}
 {% endif %}
-{% if 'KerberosGetAFSToken' in sshd_config -%}
-  KerberosGetAFSToken {{ 'yes' if sshd_config.KerberosGetAFSToken else 'no' }}
-{% endif %}
-
-{% if 'GSSAPIAuthentication' in sshd_config %}
-  GSSAPIAuthentication {{ 'yes' if sshd_config.GSSAPIAuthentication else 'no' }}
-{% endif %}
-{% if 'GSSAPICleanupCredentials' in sshd_config -%}
-  GSSAPICleanupCredentials {{ 'yes' if sshd_config.GSSAPICleanupCredentials else 'no' }}
+{% if sshd_config['KerberosGetAFSToken'] is defined -%}
+  KerberosGetAFSToken {{ sshd_config.KerberosGetAFSToken | ternary('yes', 'no') }}
 {% endif %}
 
-{% if 'UsePAM' in sshd_config -%}
-  UsePAM {{ 'yes' if sshd_config.UsePAM else 'no' }}
+{% if sshd_config['GSSAPIAuthentication'] is defined %}
+  GSSAPIAuthentication {{ sshd_config.GSSAPIAuthentication | ternary('yes', 'no') }}
+{% endif %}
+{% if sshd_config['GSSAPICleanupCredentials'] is defined -%}
+  GSSAPICleanupCredentials {{ sshd_config.GSSAPICleanupCredentials | ternary('yes', 'no') }}
 {% endif %}
 
-{% if 'AllowAgentForwarding' in sshd_config -%}
-  AllowAgentForwarding {{ 'yes' if sshd_config.AllowAgentForwarding else 'no' }}
+{% if sshd_config['UsePAM'] is defined -%}
+  UsePAM {{ sshd_config.UsePAM | ternary('yes', 'no') }}
 {% endif %}
-{% if 'AllowTcpForwarding' in sshd_config -%}
-  AllowTcpForwarding {{ 'yes' if sshd_config.AllowTcpForwarding else 'no' }}
+
+{% if sshd_config['AllowAgentForwarding'] is defined -%}
+  AllowAgentForwarding {{ sshd_config.AllowAgentForwarding | ternary('yes', 'no') }}
 {% endif %}
-{% if 'GatewayPorts' in sshd_config -%}
-  GatewayPorts {{ 'yes' if sshd_config.GatewayPorts else 'no' }}
+{% if sshd_config['AllowTcpForwarding'] is defined -%}
+  AllowTcpForwarding {{ sshd_config.AllowTcpForwarding | ternary('yes', 'no') }}
 {% endif %}
-{% if 'X11Forwarding' in sshd_config -%}
-  X11Forwarding {{ 'yes' if sshd_config.X11Forwarding else 'no' }}
+{% if sshd_config['GatewayPorts'] is defined -%}
+  GatewayPorts {{ sshd_config.GatewayPorts | ternary('yes', 'no') }}
 {% endif %}
-{% if 'X11DisplayOffset' in sshd_config -%}
+{% if sshd_config['X11Forwarding'] is /defined -%}
+  X11Forwarding {{ sshd_config.X11Forwarding | ternary('yes', 'no') }}
+{% endif %}
+{% if sshd_config['X11DisplayOffset'] is defined -%}
   X11DisplayOffset {{ sshd_config.X11DisplayOffset }}
 {% endif %}
-{% if 'X11UseLocalhost' in sshd_config -%}
-  X11UseLocalhost {{ 'yes' if sshd_config.X11UseLocalhost else 'no' }}
+{% if sshd_config['X11UseLocalhost'] is defined -%}
+  X11UseLocalhost {{ sshd_config.X11UseLocalhost | ternary('yes', 'no') }}
 {% endif %}
-{% if 'PermitTTY' in sshd_config -%}
-  PermitTTY {{ 'yes' if sshd_config.PermitTTY else 'no' }}
+{% if sshd_config['PermitTTY'] is defined -%}
+  PermitTTY {{ sshd_config.PermitTTY | ternary('yes', 'no') }}
 {% endif %}
-{% if 'PrintMotd' in sshd_config -%}
-  PrintMotd {{ 'yes' if sshd_config.PrintMotd else 'no' }}
+{% if sshd_config['PrintMotd'] is defined -%}
+  PrintMotd {{ sshd_config.PrintMotd | ternary('yes', 'no') }}
 {% endif %}
-{% if 'PrintLastLog' in sshd_config -%}
-  PrintLastLog {{ 'yes' if sshd_config.PrintLastLog else 'no' }}
+{% if sshd_config['PrintLastLog'] is defined -%}
+  PrintLastLog {{ sshd_config.PrintLastLog | ternary('yes', 'no') }}
 {% endif %}
-{% if 'TCPKeepAlive' in sshd_config -%}
-  TCPKeepAlive {{ 'yes' if sshd_config.TCPKeepAlive else 'no' }}
+{% if sshd_config['TCPKeepAlive'] is defined -%}
+  TCPKeepAlive {{ sshd_config.TCPKeepAlive | ternary('yes', 'no') }}
 {% endif %}
-{% if 'PermitUserEnvironment' in sshd_config -%}
-  PermitUserEnvironment {{ 'yes' if sshd_config.PermitUserEnvironment else 'no' }}
+{% if sshd_config['PermitUserEnvironment'] is defined -%}
+  PermitUserEnvironment {{ sshd_config.PermitUserEnvironment | ternary('yes', 'no') }}
 {% endif %}
-{% if 'Compression' in sshd_config -%}
+{% if sshd_config['Compression'] is defined -%}
   Compression {{ sshd_config.Compression }}
 {% endif %}
-{% if 'ClientAliveInterval' in sshd_config -%}
+{% if sshd_config['ClientAliveInterval'] is defined -%}
   ClientAliveInterval {{ sshd_config.ClientAliveInterval }}
 {% endif %}
-{% if 'ClientAliveCountMax' in sshd_config -%}
+{% if sshd_config['ClientAliveCountMax'] is defined -%}
   ClientAliveCountMax {{ sshd_config.ClientAliveCountMax }}
 {% endif %}
-{% if 'UseDNS' in sshd_config -%}
-  UseDNS {{ 'yes' if sshd_config.UseDNS else 'no' }}
+{% if sshd_config['UseDNS'] is defined -%}
+  UseDNS {{ sshd_config.UseDNS | ternary('yes', 'no') }}
 {% endif %}
-{% if 'PidFile' in sshd_config -%}
+{% if sshd_config['PidFile'] is defined -%}
   PidFile {{ sshd_config.PidFile }}
 {% endif %}
-{% if 'MaxStartups' in sshd_config -%}
+{% if sshd_config['MaxStartups'] is defined -%}
   MaxStartups {{ sshd_config.MaxStartups }}
 {% endif %}
-{% if 'PermitTunnel' in sshd_config -%}
-  PermitTunnel {{ 'yes' if sshd_config.PermitTunnel else 'no' }}
+{% if sshd_config['PermitTunnel'] is defined -%}
+  PermitTunnel {{ sshd_config.PermitTunnel | ternary('yes', 'no') }}
 {% endif %}
-{% if 'ChrootDirectory' in sshd_config -%}
+{% if sshd_config['ChrootDirectory'] is defined -%}
   ChrootDirectory {{ sshd_config.ChrootDirectory }}
 {% endif %}
-{% if 'VersionAddendum' in sshd_config -%}
+{% if sshd_config['VersionAddendum'] is defined -%}
   VersionAddendum {{ sshd_config.VersionAddendum }}
 {% endif %}
 
-{% if 'AcceptEnv' in sshd_config -%}
+{% if sshd_config['AcceptEnv'] is defined -%}
   AcceptEnv {{ sshd_config.AcceptEnv }}
 {% endif %}
 
-{% if 'Banner' in sshd_config -%}
+{% if sshd_config['Banner'] is defined -%}
   Banner {{ sshd_config.Banner }}
 {% endif %}
 
-{% if 'Subsystem' in sshd_config -%}
+{% if sshd_config['Subsystem'] is defined -%}
   Subsystem {{ sshd_config.Subsystem }}
 {% endif %}
-{% if 'Subsystems' in sshd_config -%}
+{% if sshd_config['Subsystems'] is defined -%}
   {% for ss in sshd_config.Subsystems -%}
     Subsystem {{ ss }}
   {% endfor %}
 {% endif %}
 
-{% if 'MatchUsers' in sshd_config -%}
+{% if sshd_config['MatchUsers'] is defined -%}
   {% for k, v in sshd_config.MatchUsers.items() -%}
     Match User {{ k }}
-    {% if 'X11Forwarding' in v %} X11Forwarding {{ 'yes' if v.X11Forwarding else 'no' }}{% endif %}
-    {% if 'AllowTcpForwarding' in v %} AllowTcpForwarding {{ 'yes' if v.AllowTcpForwarding else 'no' }}{% endif %}
-    {% if 'PermitTTY' in v %} PermitTTY {{ 'yes' if v.PermitTTY else 'no' }}{% endif %}
-    {% if 'ForceCommand' in v %} ForceCommand {{ 'yes' if v.ForceCommand else 'no' }}{% endif %}
+    {% if v['X11Forwarding'] is defined %} X11Forwarding {{ v.X11Forwarding | ternary('yes', 'no') }}{% endif %}
+    {% if v['AllowTcpForwarding'] is defined %} AllowTcpForwarding {{ v.AllowTcpForwarding | ternary('yes', 'no') }}{% endif %}
+    {% if v['PermitTTY'] is defined %} PermitTTY {{ v.PermitTTY | ternary('yes', 'no') }}{% endif %}
+    {% if v['ForceCommand'] is defined %} ForceCommand {{ v.ForceCommand | ternary('yes', 'no') }}{% endif %}
   {% endfor %}
 {% endif %}
